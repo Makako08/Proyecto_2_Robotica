@@ -8,14 +8,17 @@ Servo servo2;
 Servo servo3; 
 
 float x;
+int pot;
 void setup() {
+  pinMode(A0, INPUT);
   servo1.attach(3);
   servo2.attach(5);
   servo3.attach(6);
 }
 
 void loop() {
-  x = map(analogRead(A0), 0, 1023, 35, 90);
+  pot = analogRead(A0);
+  x = map(pot, 0, 1023, 35, 90);
   
   servo1.write(x);
   servo2.write(x);
