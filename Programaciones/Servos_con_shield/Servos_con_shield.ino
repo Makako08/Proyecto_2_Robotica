@@ -11,7 +11,7 @@ unsigned int pos180 = 530;
 
 int grado = 70;
 int tiempo = 500;
-float x;
+int x;
 int pot;
 
 void setup(){
@@ -65,22 +65,23 @@ void setServo(uint8_t n_servo, int angulo){
 
 void loop(){
   //Aquí solo se miden los límites de la garra
-  setServo(13, grado);
-  setServo(14, (grado-10));
-  setServo(15, (grado-10));
+  setServo(13, 180);
+  setServo(14, 180);
+  setServo(15, 180);
 
+/*
   for (int pos = 15; pos <= 70; pos += 1) { 
-    setServo(13, pos);
-    setServo(14, (pos-10));
-    setServo(15, (pos-10));              
-    delay(20);                       
+    setServo(10, pos);
+    setServo(11, (pos-10));
+    setServo(12, (pos-10));              
+    delay(40);                       
   }
   for (int pos = 70; pos >= 15; pos -= 1) { 
-    setServo(13, pos);
-    setServo(14, (pos-10));
-    setServo(15, (pos-10));             
-    delay(20);
-  }
-
+    setServo(10, pos);
+    setServo(11, (pos-10));
+    setServo(12, (pos-10));             
+    delay(40);
+  }*/
 }
+
 /*****************************************************************/
