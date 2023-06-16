@@ -1,6 +1,6 @@
 /*
-vry y vry van a A0 y a A1
-los botones van a lso pines 13 y 12
+vrx y vry van a A0 y a A1
+los botones van a los pines 13 y 12
 el potenciómetro va para A2
 */
 
