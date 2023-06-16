@@ -1,3 +1,9 @@
+/*
+vry y vry van a A0 y a A1
+los botones van a lso pines 13 y 12
+el potenciómetro va para A2
+*/
+
 #include <Servo.h>
 Servo R;
 Servo Y;
@@ -17,10 +23,10 @@ int pot;
 void setup() {
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
-  pinMode(A3, INPUT);
+  pinMode(A2, INPUT);
   pinMode(r1, INPUT);
   pinMode(r2, INPUT);
-  garra.atach(5)  
+  garra.attach(5);  
   Y.attach(6);
   R.attach(9);
 }
@@ -65,8 +71,8 @@ void loop() {
     Y.write(180);
   }
 
-  //Control para abrirb y cerrar la garra
-  pot = analogRead(A3);
+  //Control para abrir y cerrar la garra
+  pot = analogRead(A2);
   mov = map(pot, 0, 1023, 35, 110);
   garra.write(mov);
 
