@@ -11,7 +11,7 @@ Control Servo 180 a pin 9
 
 #include <Servo.h>
 Servo R;
-Servo Y;
+Servo Z;
 Servo garra;
 
 int deg = 90;
@@ -34,27 +34,29 @@ void setup() {
   pinMode(r1, INPUT);
   pinMode(r2, INPUT);
   garra.attach(5);  
-  Y.attach(6);
+  Z.attach(6);
   R.attach(9);
   R.write(deg);
 }
 
 void loop() {
   //Bloquea el codo y deshabilita la muñeca
-  Y.write(90);
+  Z.write(90);
   digitalWrite(in1, 0);
   digitalWrite(in2, 0);
 
   //Gira a la izquierda el servo del hombro
-  while(digitalRead(r1) == true && deg <= 135){
-    R.write(deg);
+  if(digitalRead(r1) == true && deg != 135){
     deg ++;
+    R.write(deg);
+    delay(25);
   }
 
   //Gira a la derecha el servo del hombro
-  while(digitalRead(r2) == true && deg >= 45){
-    R.write(deg);
+  if(digitalRead(r2) == true && deg != 45){
     deg --;
+    R.write(deg);
+    delay(25);
   }
   
   //Mueve a la izquierda el codo
@@ -73,12 +75,12 @@ void loop() {
 
   //Sube la muñeca
   while(analogRead(A0) >= 240){
-    Y.write(0);
+    Z.write(0);
   }
 
   //Baja la muñeca
   while(analogRead(A0) <= 50){
-    Y.write(180);
+    Z.write(180);
   }
 
   //Control para abrir y cerrar la garra
