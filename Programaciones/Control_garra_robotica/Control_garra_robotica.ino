@@ -4,7 +4,7 @@ Botones a pines 13 y 12
 Potenciómetro en A2
 ENA al pin 8
 IN1 del shield al pin 11
-IN2 del shield al in 10
+IN2 del shield al pin 3
 Control Servo 360 a pin 6
 Control Servo 180 a pin 9
 */
@@ -20,9 +20,9 @@ int r1 = 13;
 int r2 = 12;
 
 int in1 = 11;
-int in2 = 10;
+int in2 = 3;
 int enA = 8;
-int vel = 200;
+int vel = 210;
 
 int mov;
 int pot;
