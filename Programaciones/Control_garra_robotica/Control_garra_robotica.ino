@@ -1,7 +1,12 @@
 /*
-vrx y vry van a A0 y a A1
-los botones van a los pines 13 y 12
-el potenciómetro va para A2
+vrx y vry en A0 y a A1
+Botones a pines 13 y 12
+Potenciómetro en A2
+ENA al pin 8
+IN1 del shield al pin 11
+IN2 del shield al in 10
+Control Servo 360 a pin 6
+Control Servo 180 a pin 9
 */
 
 #include <Servo.h>
@@ -16,6 +21,8 @@ int r2 = 12;
 
 int in1 = 11;
 int in2 = 10;
+int enA = 8;
+int vel = 200;
 
 int mov;
 int pot;
@@ -29,6 +36,7 @@ void setup() {
   garra.attach(5);  
   Y.attach(6);
   R.attach(9);
+  R.write(deg);
 }
 
 void loop() {
@@ -53,12 +61,14 @@ void loop() {
   while(analogRead(A1) >= 240){
     digitalWrite(in1, 1);
     digitalWrite(in2, 0);
+    analogWrite(enA, vel);
   }
 
   //Mueve a la derecha el codo
   while(analogRead(A1) <= 50){
     digitalWrite(in1, 0);
     digitalWrite(in2, 1);
+    analogWrite(enA, vel);
   }
 
   //Sube la muñeca
