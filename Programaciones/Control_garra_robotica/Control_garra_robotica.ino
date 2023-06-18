@@ -22,7 +22,7 @@ int r2 = 12;
 int in1 = 11;
 int in2 = 3;
 int enA = 8;
-int vel = 210;
+int vel = 255;
 
 int mov;
 int pot;
@@ -34,8 +34,8 @@ void setup() {
   pinMode(r1, INPUT);
   pinMode(r2, INPUT);
   garra.attach(5);  
-  Z.attach(6);
-  R.attach(9);
+  Z.attach(9);
+  R.attach(6);
   R.write(deg);
 }
 
@@ -46,47 +46,51 @@ void loop() {
   digitalWrite(in2, 0);
 
   //Gira a la izquierda el servo del hombro
-  if(digitalRead(r1) == true && deg != 135){
+  while(digitalRead(r1) == true && deg != 135){
     deg ++;
     R.write(deg);
-    delay(25);
+    delay(60);
   }
 
   //Gira a la derecha el servo del hombro
-  if(digitalRead(r2) == true && deg != 45){
+  while(digitalRead(r2) == true && deg != 45){
     deg --;
     R.write(deg);
-    delay(25);
+    delay(60);
   }
   
-  //Mueve a la izquierda el codo
-  while(analogRead(A1) >= 240){
-    digitalWrite(in1, 1);
+//Mueve a la izquierda el codo
+  while(analogRead(A1) > 800){
+    analogWrite(in1, vel);
     digitalWrite(in2, 0);
-    analogWrite(enA, vel);
+    digitalWrite(enA, HIGH);
   }
 
   //Mueve a la derecha el codo
-  while(analogRead(A1) <= 50){
+  while(analogRead(A1) < 200){
     digitalWrite(in1, 0);
-    digitalWrite(in2, 1);
-    analogWrite(enA, vel);
+    analogWrite(in2, vel);
+    digitalWrite(enA, HIGH);
   }
 
   //Sube la muñeca
-  while(analogRead(A0) >= 240){
+  while(analogRead(A0) > 800){
     Z.write(0);
   }
 
   //Baja la muñeca
-  while(analogRead(A0) <= 50){
+  while(analogRead(A0) < 200){
     Z.write(180);
   }
 
   //Control para abrir y cerrar la garra
-  pot = analogRead(A2);
-  mov = map(pot, 0, 1023, 35, 110);
-  garra.write(mov);
-
+  pot = analogRead(A3);
+  //mov = map(pot, 0, 1023, 35, 110);
+  if (pot < 500){
+    garra.write(35);
+  }
+  if (pot > 500){
+    garra.write(110);
+  }
 }
 
